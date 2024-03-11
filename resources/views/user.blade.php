@@ -17,25 +17,37 @@
             <th>Username</th>
             <th>Nama</th>
             <th>ID Level Pengguna</th>
+            <th>Aksi</th>
         </tr>
-        </tr>
-        {{-- @foreach ($data as $d)
-            <tr>
-                <td>{{ $d->user_id }}</td>
-                @@ -23,11 +26,14 @@
-                <td>{{ $d->level_id }}</td>
-            </tr>
-        @endforeach --}}
+        @foreach ($data as $d)
         <tr>
-        <tr>
-            <td>{{ $data->user_id }}</td>
-            <td>{{ $data->username }}</td>
-            <td>{{ $data->nama }}</td>
-            <td>{{ $data->level_id }}</td>
+            <td>{{ $d->user_id}}</td>
+            <td>{{ $d->Username}}</td>
+            <td>{{ $d->nama}}</td>
+            <td>{{ $d->level_id}}</td>
+            <td><a href={{route('/user/ubah', $d->user_id) }}>Ubah</a> |
+             <a href={{route('/user/hapus', $d->user_id)}}>Hapus</a></td>
         </tr>
-        {{-- <tr>
-            <td>{{ $data }}</td>
-        </tr> --}}
+        @endforeach
     </table>
-</body>
+    <body>
+        <h1>Form Tambah Data User</h1>
+        <a href="{{route('/user')}}">Kembali</a>
+        <form method="post" action="{{route('/user/tambah_simpan')}}">
+            {{csrf_field()}}
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Masukan Username">
+            <br>
+            <label>Nama</label>
+            <input type="text" name="nama" placeholder="Masukan Nama">
+            <br>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Masukan Password">
+            <br>
+            <label>Level ID</label>
+            <input type="number" name="level_id">
+            <br>
+            <input type="submit" name="btn btn-success" value="Simpan">
+        </form>
+    </body>
 </html>
